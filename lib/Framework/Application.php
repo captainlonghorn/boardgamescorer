@@ -28,6 +28,47 @@ abstract class Application
 
     abstract public function run() :void;
 
+    public function getController()
+    {
+        $router = new Router;
+
+        $xml = new \DOMDocument;
+        $xml->load(__DIR__ . '/../../App/' . $this->name . '/Config/routes.xml');
+
+        $routes = $xml->getElementsByTagName('route');
+
+        // routes (XML)
+        foreach ($routes as $route) {
+            $vars = [];
+
+            // does URL have variables ?
+            if ($route->hasAttribute('vars')) {
+                $vars = explode(',', $route->getAttribute('vars'));
+            }
+
+            // add route to router
+            $router->addRoute(new Route($route->getAttribute('url'), $route->getAttribute('module'),
+                $route->getAttribute('action'), $vars));
+        }
+
+        try {
+            // retrieve route corresponding to URL
+            $matchedRoute = $router->getRoute($this->httpRequest->requestURI());
+        } catch (\RuntimeException $e) {
+            if ($e->getCode() == Router::NO_ROUTE) {
+                // if no route, page does not exists
+                $this->httpResponse->redirect404();
+            }
+        }
+
+        // URL variables are added to $_GET
+        $_GET = array_merge($_GET, $matchedRoute->vars());
+
+        // Controler instanciation
+        $controllerClass = 'App\\' . $this->name . '\\Modules\\' . $matchedRoute->module() . '\\' . $matchedRoute->module() . 'Controller';
+        return new $controllerClass($this, $matchedRoute->module(), $matchedRoute->action());
+    }
+
     /*
      * GETTERS
      */
@@ -42,7 +83,8 @@ abstract class Application
         return $this->httpResponse;
     }
 
-    public function getName() :string {
+    public function getName() :string
+    {
         return $this->name;
     }
 }
