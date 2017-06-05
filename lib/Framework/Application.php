@@ -20,8 +20,8 @@ abstract class Application
 
     public function __construct()
     {
-        $this->httpRequest = new HTTPRequest;
-        $this->httpResponse = new HTTPResponse;
+        $this->httpRequest = new HTTPRequest($this);
+        $this->httpResponse = new HTTPResponse($this);
         // name will be passed by extended class (frontend or backend)
         $this->name = '';
     }
