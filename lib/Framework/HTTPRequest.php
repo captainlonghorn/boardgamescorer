@@ -8,7 +8,7 @@
 
 namespace Framework;
 
-class HTTPRequest
+class HTTPRequest extends ApplicationComponent
 {
     /*
      * Cookies

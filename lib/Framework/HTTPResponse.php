@@ -9,7 +9,7 @@
 namespace Framework;
 
 
-class HTTPResponse
+class HTTPResponse extends ApplicationComponent
 {
     private $page;
 

@@ -22,6 +22,7 @@ abstract class Application
     {
         $this->httpRequest = new HTTPRequest;
         $this->httpResponse = new HTTPResponse;
+        // name will be passed by extended class (frontend or backend)
         $this->name = '';
     }
 
