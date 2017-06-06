@@ -32,6 +32,9 @@ class Page extends ApplicationComponent
         {
             throw new \RuntimeException('View does not exist');
         }
+        
+        $user = $this->app->user();
+
         // Create array containing variables and their values
         extract($this->vars);
 
