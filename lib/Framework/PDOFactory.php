@@ -14,7 +14,7 @@ class PDOFactory
     public static function getMysqlConnexion()
     {
         // TODO : externalise consts
-        $db = new \PDO('mysql:host=localhost;dbname=news', 'root', '');
+        $db = new \PDO('mysql:host=localhost;dbname=boardgame_scorer', 'root', '');
         $db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
 
         return $db;
