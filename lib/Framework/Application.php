@@ -18,6 +18,7 @@ abstract class Application
     protected $HTTPResponse;
     protected $name;
     protected $user;
+    protected $config;
 
     public function __construct()
     {
@@ -26,6 +27,7 @@ abstract class Application
         // name will be passed by extended class (frontend or backend)
         $this->name = '';
         $this->user = new User();
+        $this->config = new Config();
     }
 
     abstract public function run() :void;
