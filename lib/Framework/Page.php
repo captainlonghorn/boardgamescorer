@@ -33,7 +33,7 @@ class Page extends ApplicationComponent
             throw new \RuntimeException('View does not exist');
         }
         
-        $user = $this->app->user();
+        $user = $this->app->getUser();
 
         // Create array containing variables and their values
         extract($this->vars);
@@ -44,7 +44,7 @@ class Page extends ApplicationComponent
         $content = ob_get_clean();
 
         ob_start();
-        require __DIR__.'/../../App/'.$this->app->name().'/Templates/layout.php';
+        require __DIR__.'/../../App/'.$this->app->getName().'/Templates/layout.php';
         return ob_get_clean();
     }
 

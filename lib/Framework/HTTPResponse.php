@@ -13,12 +13,12 @@ class HTTPResponse extends ApplicationComponent
 {
     private $page;
 
-    public function addHeader(string $header) :void
+    public function addHeader(string $header)
     {
         header($header);
     }
 
-    public function redirect(string $location) :void
+    public function redirect(string $location)
     {
         header('Location :' . $location);
         exit();

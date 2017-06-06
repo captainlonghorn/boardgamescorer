@@ -30,7 +30,7 @@ abstract class Application
         $this->config = new Config();
     }
 
-    abstract public function run() :void;
+    abstract public function run();
 
     public function getController()
     {
@@ -90,5 +90,10 @@ abstract class Application
     public function getName() :string
     {
         return $this->name;
+    }
+
+    public function getUser() :User
+    {
+        return $this->user;
     }
 }

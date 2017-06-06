@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <routes>
+    <route url="/" module="boardgame" action="index" ></route>
     <route url="/boardgames.html" module="Boardgame" action="index" ></route>
     <route url="/boardgame/(.+)/([0-9]+)\.html" module="Boardgame" action="show" vars="slug,id" />
 </routes>

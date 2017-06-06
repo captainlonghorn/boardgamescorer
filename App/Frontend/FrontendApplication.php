@@ -8,7 +8,7 @@
 
 namespace App\Frontend;
 
-use Framework\Application;
+use \Framework\Application;
 
 class FrontendApplication extends Application
 {

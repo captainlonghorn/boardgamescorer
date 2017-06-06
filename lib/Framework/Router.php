@@ -15,7 +15,7 @@ class Router
 
     const NO_ROUTE = 1;
 
-    public function addRoute(Route $route) :void
+    public function addRoute(Route $route)
     {
         if (!in_array($route, $this->routes)) {
             $routes[] = $route;
