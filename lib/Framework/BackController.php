@@ -76,5 +76,7 @@ abstract class BackController extends ApplicationComponent
         }
 
         $this->view = $view;
+        // lorsque l'on change de vue, il faut en informer la page concernée grâce à la méthode setContentFile() de notre classe Page :
+        $this->page->setContentFile(__DIR__.'/../../App/'.$this->app->name().'/Modules/'.$this->module.'/Views/'.$this->view.'.php');
     }
 }
