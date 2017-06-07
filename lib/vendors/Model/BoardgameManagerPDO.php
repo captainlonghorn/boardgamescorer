@@ -20,18 +20,19 @@ class BoardgameManagerPDO extends BoardgameManager
     public function getList($debut = -1, $limite = -1)
     {
         // préparation de la requête
-        $query = $this->dao->prepare('
+        $sql = '
             SELECT g.id, g.name AS gamename, g.is_extension, 
                 a.firstname, a.lastname, e.name AS editorname
             FROM boardgames g
                 INNER JOIN people a ON(a.id = g.author_id and a.is_author IS TRUE)
                 INNER JOIN editors e ON(e.id = g.editor_id)
-            ORDER BY g.name ASC'
-        );
+            ORDER BY g.name ASC';
         if ($debut != -1 || $limite != -1)
         {
-            $query .= ' LIMIT '.(int) $limite.' OFFSET '.(int) $debut;
+            $sql .= ' LIMIT '.(int) $limite.' OFFSET '.(int) $debut;
         }
+        $query = $this->dao->prepare($sql);
+
 
         $listeBoardgames = array();
 

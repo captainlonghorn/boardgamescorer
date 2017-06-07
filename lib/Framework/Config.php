@@ -11,7 +11,7 @@
 namespace Framework;
 
 
-class Config
+class Config extends  ApplicationComponent
 {
     protected $vars = [];
 
@@ -23,7 +23,8 @@ class Config
         if (!$this->vars)
         {
             $xml = new \DOMDocument;
-            $xml->load(__DIR__.'/../../App/'.$this->app->name().'/Config/'.CONFIG_FILE_NAME);
+            //var_dump($this->app);
+            $xml->load(__DIR__.'/../../App/'.$this->app->getName().'/Config/app_config.xml');
 
             $elements = $xml->getElementsByTagName('define');
 

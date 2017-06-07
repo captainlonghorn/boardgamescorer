@@ -20,9 +20,11 @@ class FrontendApplication extends Application
         $this->name = 'Frontend';
     }
 
-    public function run() :void
+    public function run()
     {
+        //echo '123';
         $controller = $this->getController();
+        //var_dump($controller);
         $controller->execute();
 
         $this->httpResponse->setPage($controller->getPage());

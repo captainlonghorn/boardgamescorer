@@ -95,7 +95,7 @@ class Boardgame extends Entity
      */
 
     // SETTERS
-    private function setId($value)
+    public function setId($value)
     {
         $id = (int)$value;
         if ($id) {

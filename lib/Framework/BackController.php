@@ -40,7 +40,7 @@ abstract class BackController extends ApplicationComponent
             throw new \RuntimeException('Action "'.$this->action.'" is undefined in this module');
         }
 
-        $this->$method($this->app->httpRequest());
+        $this->$method($this->app->getHttpRequest());
     }
 
     public function getPage()
@@ -77,6 +77,6 @@ abstract class BackController extends ApplicationComponent
 
         $this->view = $view;
         // lorsque l'on change de vue, il faut en informer la page concernée grâce à la méthode setContentFile() de notre classe Page :
-        $this->page->setContentFile(__DIR__.'/../../App/'.$this->app->name().'/Modules/'.$this->module.'/Views/'.$this->view.'.php');
+        $this->page->setContentFile(__DIR__.'/../../App/'.$this->app->getName().'/Modules/'.$this->module.'/Views/'.$this->view.'.php');
     }
 }

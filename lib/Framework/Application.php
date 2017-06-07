@@ -26,8 +26,8 @@ abstract class Application
         $this->httpResponse = new HTTPResponse($this);
         // name will be passed by extended class (frontend or backend)
         $this->name = '';
-        $this->user = new User();
-        $this->config = new Config();
+        $this->user = new User($this);
+        $this->config = new Config($this);
     }
 
     abstract public function run();
@@ -38,21 +38,29 @@ abstract class Application
 
         $xml = new \DOMDocument;
         $xml->load(__DIR__ . '/../../App/' . $this->name . '/Config/routes.xml');
+        echo __DIR__ . '/../../App/' . $this->name . '/Config/routes.xml';
 
         $routes = $xml->getElementsByTagName('route');
+        var_dump($routes);
 
         // routes (XML)
         foreach ($routes as $route) {
+            echo 'r ';
             $vars = [];
 
             // does URL have variables ?
             if ($route->hasAttribute('vars')) {
                 $vars = explode(',', $route->getAttribute('vars'));
+                //var_dump($vars);
             }
 
             // add route to router
+            $test = new Route($route->getAttribute('url'), $route->getAttribute('module'),
+                $route->getAttribute('action'), $vars);
+            var_dump($test);
             $router->addRoute(new Route($route->getAttribute('url'), $route->getAttribute('module'),
-                $route->getAttribute('action'), $vars));
+               $route->getAttribute('action'), $vars));
+            var_dump($router);
         }
 
         try {
@@ -95,5 +103,10 @@ abstract class Application
     public function getUser() :User
     {
         return $this->user;
+    }
+
+    public function getConfig() :Config
+    {
+        return $this->config;
     }
 }

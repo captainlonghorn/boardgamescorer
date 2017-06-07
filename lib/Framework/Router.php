@@ -11,20 +11,24 @@ namespace Framework;
 
 class Router
 {
-    private $routes = array();
+    protected $routes = [];
 
     const NO_ROUTE = 1;
 
     public function addRoute(Route $route)
     {
+        //var_dump($route);
         if (!in_array($route, $this->routes)) {
-            $routes[] = $route;
+            $this->routes[] = $route;
         }
+        //var_dump($this->routes);
     }
 
-    public function getRoute(string $url) :Route
+    public function getRoute(string $url)
     {
+        echo (' in router ');
         foreach ($this->routes as $route) {
+            var_dump($route);
             // Check if current route matches URL
             if (($varsValues = $route->match($url)) !== false) {
                 // if route has variables

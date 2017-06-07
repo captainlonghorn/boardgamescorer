@@ -16,7 +16,7 @@ class BoardgameController extends BackController
 {
     public function executeIndex(HTTPRequest $request)
     {
-        $nb_games = $this->app->config()->get('nb_games_index');
+        $nb_games = $this->app->getConfig()->get('nb_games_index');
 
         // On ajoute une définition pour le titre.
         $this->page->addVar('title', 'Boardgames shortlist');
@@ -27,8 +27,9 @@ class BoardgameController extends BackController
         // Cette ligne, vous ne pouviez pas la deviner sachant qu'on n'a pas encore touché au modèle.
         // Contentez-vous donc d'écrire cette instruction, nous implémenterons la méthode ensuite.
         $listeBoardgames = $manager->getList(0, $nb_games);
+        var_dump($listeBoardgames);
 
-        // On ajoute la variable $listeNews à la vue.
-        $this->page->addVar('listeNews', $listeBoardgames);
+        // On ajoute la variable $liste à la vue.
+        $this->page->addVar('listeBoardgames', $listeBoardgames);
     }
 }
