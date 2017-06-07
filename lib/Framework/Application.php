@@ -38,29 +38,22 @@ abstract class Application
 
         $xml = new \DOMDocument;
         $xml->load(__DIR__ . '/../../App/' . $this->name . '/Config/routes.xml');
-        echo __DIR__ . '/../../App/' . $this->name . '/Config/routes.xml';
 
         $routes = $xml->getElementsByTagName('route');
-        var_dump($routes);
 
         // routes (XML)
         foreach ($routes as $route) {
-            echo 'r ';
             $vars = [];
 
             // does URL have variables ?
             if ($route->hasAttribute('vars')) {
                 $vars = explode(',', $route->getAttribute('vars'));
-                //var_dump($vars);
             }
 
             // add route to router
-            $test = new Route($route->getAttribute('url'), $route->getAttribute('module'),
-                $route->getAttribute('action'), $vars);
-            var_dump($test);
             $router->addRoute(new Route($route->getAttribute('url'), $route->getAttribute('module'),
                $route->getAttribute('action'), $vars));
-            var_dump($router);
+
         }
 
         try {

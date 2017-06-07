@@ -43,6 +43,7 @@ class Boardgame extends Entity
     {
         foreach ($boardgame_data as $key => $value) {
             $method = 'set' . ucfirst($key);
+            //var_dump($method);
             if (method_exists($this, $method)) {
                 $this->$method($value);
             }
@@ -74,7 +75,7 @@ class Boardgame extends Entity
 
     public function __get($name)
     {
-        echo "Récupération de '$name'\n";
+        //echo "Récupération de '$name'\n";
         if (isset($this->$name)) {
             return $this->$name;
         }

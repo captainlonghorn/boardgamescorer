@@ -17,18 +17,15 @@ class Router
 
     public function addRoute(Route $route)
     {
-        //var_dump($route);
         if (!in_array($route, $this->routes)) {
             $this->routes[] = $route;
         }
-        //var_dump($this->routes);
     }
 
     public function getRoute(string $url)
     {
-        echo (' in router ');
         foreach ($this->routes as $route) {
-            var_dump($route);
+
             // Check if current route matches URL
             if (($varsValues = $route->match($url)) !== false) {
                 // if route has variables

@@ -21,25 +21,33 @@ class BoardgameManagerPDO extends BoardgameManager
     {
         // préparation de la requête
         $sql = '
-            SELECT g.id, g.name AS gamename, g.is_extension, 
-                a.firstname, a.lastname, e.name AS editorname
-            FROM boardgames g
-                INNER JOIN people a ON(a.id = g.author_id and a.is_author IS TRUE)
-                INNER JOIN editors e ON(e.id = g.editor_id)
-            ORDER BY g.name ASC';
+            SELECT 
+                `id`, 
+                `name`, 
+                `author_id`,
+                `author_second_id`, 
+                `editor_id`, 
+                `description`, 
+                `is_extension`, 
+                `is_collaborative`, 
+                `has_invert_score`, 
+                `img_url` 
+            FROM `boardgames`
+            ORDER BY `name` ASC';
         if ($debut != -1 || $limite != -1)
         {
             $sql .= ' LIMIT '.(int) $limite.' OFFSET '.(int) $debut;
         }
-        $query = $this->dao->prepare($sql);
-
-
+        $stmt = $this->dao->prepare($sql);
+        //$stmt->setFetchMode(PDO::FETCH_ASSOC);
         $listeBoardgames = array();
-
-        if ($query->execute()) {
-            while ($result_line = $query->fetch()) {
+        // todo : revoir cette partie > fetch_assoc et collection iterator
+        if ($stmt->execute()) {
+            while ($result_line = $stmt->fetch()) {
                 $boardgame_data = $result_line;
+                //var_dump($boardgame_data);
                 $boardgame = new Boardgame($boardgame_data);
+                //var_dump($boardgame);
                 $listeBoardgames[] = $boardgame;
 
             }

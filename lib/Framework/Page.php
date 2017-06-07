@@ -24,12 +24,10 @@ class Page extends ApplicationComponent
         }
 
         $this->vars[$var] = $value;
-        var_dump($this->vars);
     }
 
     public function getGeneratedPage()
     {
-        echo 'ggp';
         if (!file_exists($this->contentFile))
         {
             throw new \RuntimeException('View does not exist');
@@ -43,7 +41,6 @@ class Page extends ApplicationComponent
         ob_start();
         // TODO : below are 2 weird points
         require $this->contentFile;
-        var_dump($this->contentFile);
         $content = ob_get_clean();
 
         ob_start();
