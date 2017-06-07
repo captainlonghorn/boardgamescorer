@@ -8,6 +8,7 @@
 namespace Model;
 
 use \Entity\Boardgame;
+use Entity\BoardgameCollection;
 
 class BoardgameManagerPDO extends BoardgameManager
 {
@@ -39,19 +40,14 @@ class BoardgameManagerPDO extends BoardgameManager
             $sql .= ' LIMIT '.(int) $limite.' OFFSET '.(int) $debut;
         }
         $stmt = $this->dao->prepare($sql);
-        //$stmt->setFetchMode(PDO::FETCH_ASSOC);
-        $listeBoardgames = array();
-        // todo : revoir cette partie > fetch_assoc et collection iterator
+        // todo : a quickiest way to do this ? FETCH_CLASS ?
         if ($stmt->execute()) {
             while ($result_line = $stmt->fetch()) {
-                $boardgame_data = $result_line;
-                //var_dump($boardgame_data);
-                $boardgame = new Boardgame($boardgame_data);
-                //var_dump($boardgame);
-                $listeBoardgames[] = $boardgame;
-
+                $boardgame_data[] = $result_line;
             }
-            return ($listeBoardgames);
+            // object collection
+            $BoardgameCollection = new BoardgameCollection($boardgame_data);
+            return $BoardgameCollection;
         } else {
             trigger_error('Unable to build boardgame list (blm10)', E_USER_WARNING);
             return false;
