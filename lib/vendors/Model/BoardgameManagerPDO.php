@@ -12,11 +12,9 @@ use Entity\BoardgameCollection;
 
 class BoardgameManagerPDO extends BoardgameManager
 {
-
-
     /*
-         * GET + CRUD
-         */
+     * GET + CRUD
+     */
     // Fetch des données d'un jeu en particulier
     public function getList($debut = -1, $limite = -1)
     {
@@ -35,9 +33,8 @@ class BoardgameManagerPDO extends BoardgameManager
                 `img_url` 
             FROM `boardgames`
             ORDER BY `name` ASC';
-        if ($debut != -1 || $limite != -1)
-        {
-            $sql .= ' LIMIT '.(int) $limite.' OFFSET '.(int) $debut;
+        if ($debut != -1 || $limite != -1) {
+            $sql .= ' LIMIT ' . (int)$limite . ' OFFSET ' . (int)$debut;
         }
         $stmt = $this->dao->prepare($sql);
         // todo : a quickiest way to do this ? FETCH_CLASS ?
