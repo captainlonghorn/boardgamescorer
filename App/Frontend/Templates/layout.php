@@ -26,6 +26,7 @@
         <ul>
             <li><a href="/">Accueil</a></li>
             <li><a href="liste.php">Liste</a></li>
+            <li><a href="ajout.php">Ajout</a></li>
             <?php if ($user->isAuthenticated()) { ?>
                 <li><a href="/admin/">Admin</a></li>
                 <li><a href="/admin/boardgame-insert.html">New boardgame</a></li>

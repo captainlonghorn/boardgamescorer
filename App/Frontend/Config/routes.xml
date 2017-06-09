@@ -2,4 +2,5 @@
 <routes>
     <route url="/" module="Boardgame" action="Index" ></route>
     <route url="/liste.php" module="Boardgame" action="Liste" ></route>
+    <route url="/ajout.php" module="Boardgame" action="InsertBoardgame" ></route>
 </routes>

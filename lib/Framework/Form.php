@@ -19,7 +19,7 @@ class Form
         $this->setEntity($entity);
     }
 
-    public function add(Field $field)
+    public function add(FormField $field)
     {
         $attr = $field->name(); // On récupère le nom du champ.
         $field->setValue($this->entity->$attr()); // On assigne la valeur correspondante au champ.

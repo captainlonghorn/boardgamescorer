@@ -17,6 +17,7 @@ abstract class FormField
     protected $errorMessage;
     protected $label;
     protected $name;
+    protected $validators = [];
     protected $value;
 
     public function __construct(array $options = [])
@@ -31,7 +32,12 @@ abstract class FormField
 
     public function isValid()
     {
-        // On écrira cette méthode plus tard.
+        foreach ($this->validators as $validator) {
+            if (!$validator->isValid($this->value)) {
+                $this->errorMessage = $validator->errorMessage();
+                return false;
+            }
+        }
     }
 
     public function label()
