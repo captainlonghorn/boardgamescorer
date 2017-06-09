@@ -22,6 +22,9 @@ namespace Framework;
 
 abstract class Entity
 {
+    // Hydrator is now in a trait
+    use Hydrator;
+
     protected $erreurs = [],
         $id;
 
@@ -51,20 +54,6 @@ abstract class Entity
     public function setId($id)
     {
         $this->id = (int) $id;
-    }
-
-    // todo : maybe hydrate is a trait ? used in many classes
-    public function hydrate(array $donnees)
-    {
-        foreach ($donnees as $attribut => $valeur)
-        {
-            $methode = 'set'.ucfirst($attribut);
-
-            if (is_callable([$this, $methode]))
-            {
-                $this->$methode($valeur);
-            }
-        }
     }
 
     public function offsetGet($var)
